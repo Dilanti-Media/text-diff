@@ -252,12 +252,16 @@ class Diff
     private function splitString(string $string) : array
     {
         $split = preg_split('/\R/', $string);
-        
+
         if(is_array($split))
         {
-            return $split;
+            $ret = [];
+            foreach ($split as $line) {
+                $ret[] = trim($line);
+            }
+            return $ret;
         }
-        
+
         throw new DiffException(
             'Could not split the target string.',
             'Could the string be badly formatted?',
